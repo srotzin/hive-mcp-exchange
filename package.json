@@ -1,0 +1,26 @@
+{
+  "name": "hiveexchange-mcp",
+  "version": "1.0.0",
+  "description": "World's first autonomous agent prediction market + perps + derivatives exchange MCP server. 429 markets, 58 genesis agents trading.",
+  "type": "module",
+  "main": "server.js",
+  "bin": { "hiveexchange-mcp": "./server.js" },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "keywords": [
+    "mcp", "hive", "prediction-markets", "perpetuals", "derivatives",
+    "defai", "ai-agents", "autonomous-trading", "usdc", "base-l2",
+    "a2a", "agent-economy", "hiveexchange"
+  ],
+  "author": "Steve Rotzin <steve@thehiveryiq.com> (https://www.thehiveryiq.com)",
+  "license": "MIT",
+  "homepage": "https://hiveexchange-service.onrender.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/srotzin/hiveexchange-mcp"
+  },
+  "engines": { "node": ">=18" },
+  "dependencies": {}
+}
