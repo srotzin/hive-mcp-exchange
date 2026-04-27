@@ -15,6 +15,7 @@
  */
 
 import express from 'express';
+import { renderLanding, renderRobots, renderSitemap, renderSecurity, renderOgImage, seoJson, BRAND_GOLD } from './meta.js';
 
 const app = express();
 app.use(express.json());
@@ -104,6 +105,25 @@ const TOOLS = [
   },
 ];
 
+
+const SERVICE_CFG = {
+  service: "hive-mcp-exchange",
+  shortName: "HiveExchange",
+  title: "HiveExchange \u00b7 Autonomous Agent Prediction Markets, Perps & Derivatives MCP",
+  tagline: "World's first autonomous agent prediction market + perps + derivatives exchange.",
+  description: "MCP server for HiveExchange \u2014 429 prediction markets and perps with 58 genesis AI agents trading. USDC settlement on Base L2, real on-chain rails, no mocks. Pay-per-call via x402 in USDC.",
+  keywords: ["mcp", "model-context-protocol", "x402", "agentic", "ai-agent", "ai-agents", "llm", "hive", "hive-civilization", "prediction-markets", "perpetuals", "derivatives", "defai", "autonomous-trading", "usdc", "base", "base-l2", "a2a", "agent-economy"],
+  externalUrl: "https://hive-mcp-gateway.onrender.com/exchange",
+  gatewayMount: "/exchange",
+  version: "1.0.1",
+  pricing: [
+    { name: "exchange_list_markets", priceUsd: 0, label: "List markets \u2014 free" },
+    { name: "exchange_market_odds", priceUsd: 0.001, label: "Market odds (Tier 1)" },
+    { name: "exchange_place_prediction", priceUsd: 0.05, label: "Place prediction (Tier 3)" },
+    { name: "exchange_open_perp", priceUsd: 0.05, label: "Open perp (Tier 3)" }
+  ],
+};
+SERVICE_CFG.tools = (typeof TOOLS !== 'undefined' ? TOOLS : (typeof MCP_TOOLS !== 'undefined' ? MCP_TOOLS : [])).map(t => ({ name: t.name, description: t.description }));
 // ─── Hive API proxy ───────────────────────────────────────────────────────────
 async function hiveGet(path, params = {}) {
   const url = new URL(`${EXCHANGE_BASE}${path}`);
@@ -243,6 +263,24 @@ app.get('/.well-known/mcp.json', (req, res) => res.json({
   tools: TOOLS.map(t => ({ name: t.name, description: t.description })),
 }));
 
+
+// HIVE_META_BLOCK_v1 — comprehensive meta tags + JSON-LD + crawler discovery
+app.get('/', (req, res) => {
+  res.type('text/html; charset=utf-8').send(renderLanding(SERVICE_CFG));
+});
+app.get('/og.svg', (req, res) => {
+  res.type('image/svg+xml').send(renderOgImage(SERVICE_CFG));
+});
+app.get('/robots.txt', (req, res) => {
+  res.type('text/plain').send(renderRobots(SERVICE_CFG));
+});
+app.get('/sitemap.xml', (req, res) => {
+  res.type('application/xml').send(renderSitemap(SERVICE_CFG));
+});
+app.get('/.well-known/security.txt', (req, res) => {
+  res.type('text/plain').send(renderSecurity());
+});
+app.get('/seo.json', (req, res) => res.json(seoJson(SERVICE_CFG)));
 app.listen(PORT, () => {
   console.log(`HiveExchange MCP Server running on :${PORT}`);
   console.log(`  Endpoint : http://localhost:${PORT}/mcp`);
