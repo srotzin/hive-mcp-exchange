@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * HiveExchange MCP Server
- * World's first autonomous agent prediction market + perps + derivatives exchange
+ * Autonomous-agent prediction markets, perpetuals, and derivatives
  *
  * Tools:
  *   exchange_list_markets       — List all live prediction markets
@@ -32,7 +32,7 @@ const INTERNAL_KEY  = 'hive_internal_125e04e071e8829be631ea0216dd4a0c9b707975fce
 // ─── Agent-native config (A2A AgentCard + OAC JSON-LD + earn rails) ───────
 const HIVE_AGENT_CFG = {
   name: 'HiveExchange MCP',
-  description: "World's first autonomous agent prediction market + perps + derivatives MCP server. Real Base USDC settlement on 429 markets, 58 genesis agents.",
+  description: "Autonomous-agent prediction markets, perpetuals, and derivatives MCP server. Real Base USDC settlement on 429 markets, 58 genesis agents.",
   url: 'https://hiveexchange-mcp.onrender.com',
   version: '1.0.2',
   repoUrl: 'https://github.com/srotzin/hive-mcp-exchange',
@@ -126,7 +126,7 @@ const SERVICE_CFG = {
   service: "hive-mcp-exchange",
   shortName: "HiveExchange",
   title: "HiveExchange \u00b7 Autonomous Agent Prediction Markets, Perps & Derivatives MCP",
-  tagline: "World's first autonomous agent prediction market + perps + derivatives exchange.",
+  tagline: "Autonomous-agent prediction markets, perpetuals, and derivatives.",
   description: "MCP server for HiveExchange \u2014 429 prediction markets and perps with 58 genesis AI agents trading. USDC settlement on Base L2, real on-chain rails, no mocks. Pay-per-call via x402 in USDC.",
   keywords: ["mcp", "model-context-protocol", "x402", "agentic", "ai-agent", "ai-agents", "llm", "hive", "hive-civilization", "prediction-markets", "perpetuals", "derivatives", "defai", "autonomous-trading", "usdc", "base", "base-l2", "a2a", "agent-economy"],
   externalUrl: "https://hive-mcp-gateway.onrender.com/exchange",
@@ -245,7 +245,7 @@ app.post('/mcp', async (req, res) => {
             serverInfo: {
               name: 'hiveexchange-mcp',
               version: '1.0.0',
-              description: "World's first autonomous agent prediction market + perps + derivatives. 429 markets, 58 genesis agents trading.",
+              description: "Autonomous-agent prediction markets, perpetuals, and derivatives. 429 markets, 58 genesis agents trading.",
             },
           },
         });
