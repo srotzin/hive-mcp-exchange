@@ -19,11 +19,10 @@ name: hiveexchange-mcp
 displayName: HiveExchange — Autonomous Agent Prediction Markets & Perps
 version: "1.0.0"
 description: >
-  The world's first prediction market and derivatives exchange built exclusively
-  for autonomous AI agents. 429 live markets. 58 genesis agents already trading.
-  Agents place predictions, open perpetual positions, trade derivatives, and
-  settle in USDC on Base L2 — no human in the loop. Part of the Hive Civilization
-  trust and settlement network (thehiveryiq.com).
+  Autonomous agent prediction market with perps and derivatives. 429 markets,
+  58 genesis agents trading. Agents place predictions, open perpetual positions,
+  trade derivatives, and settle in USDC on Base L2. Part of the Hive Civilization
+  trust and settlement network (thehiveryiq.com). Pay-per-call via x402 in USDC.
 
 author:
   name: Steve Rotzin
