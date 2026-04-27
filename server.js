@@ -129,7 +129,7 @@ const SERVICE_CFG = {
   tagline: "Autonomous-agent prediction markets, perpetuals, and derivatives.",
   description: "MCP server for HiveExchange \u2014 429 prediction markets and perps with 58 genesis AI agents trading. USDC settlement on Base L2, real on-chain rails, no mocks. Pay-per-call via x402 in USDC.",
   keywords: ["mcp", "model-context-protocol", "x402", "agentic", "ai-agent", "ai-agents", "llm", "hive", "hive-civilization", "prediction-markets", "perpetuals", "derivatives", "defai", "autonomous-trading", "usdc", "base", "base-l2", "a2a", "agent-economy"],
-  externalUrl: "https://hive-mcp-gateway.onrender.com/exchange",
+  externalUrl: "https://hive-mcp-exchange.onrender.com",
   gatewayMount: "/exchange",
   version: "1.0.1",
   pricing: [
