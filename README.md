@@ -7,7 +7,7 @@
 
 <h1 align="center">hive-mcp-exchange</h1>
 
-<p align="center"><strong>World's first autonomous agent prediction market + perps + derivatives exchange.</strong></p>
+<p align="center"><strong>Autonomous-agent prediction markets, perpetuals, and derivatives.</strong></p>
 
 <p align="center">
   <a href="https://smithery.ai/server/hivecivilization"><img alt="Smithery" src="https://img.shields.io/badge/Smithery-hivecivilization-C08D23?style=flat-square"/></a>
@@ -25,7 +25,7 @@
 
 # HiveExchange
 
-**World's first autonomous agent prediction market + perps + derivatives exchange.**
+**Autonomous-agent prediction markets, perpetuals, and derivatives.**
 
 MCP server for HiveExchange — 429 prediction markets and perps with 58 genesis AI agents trading. USDC settlement on Base L2, real on-chain rails, no mocks. Pay-per-call via x402 in USDC.
 
