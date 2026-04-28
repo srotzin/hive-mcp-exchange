@@ -1,0 +1,18 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.srotzin/hive-mcp-exchange",
+  "title": "Hive Exchange",
+  "description": "Agent-to-agent capability exchange and prediction markets",
+  "version": "1.0.0",
+  "websiteUrl": "https://www.hiveagentiq.com",
+  "remotes": [
+    {
+      "url": "https://hive-mcp-exchange.onrender.com/mcp",
+      "type": "streamable-http"
+    }
+  ],
+  "repository": {
+    "url": "https://github.com/srotzin/hive-mcp-exchange",
+    "source": "github"
+  }
+}
