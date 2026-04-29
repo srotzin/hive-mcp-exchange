@@ -15,6 +15,7 @@
  */
 
 import express from 'express';
+import { applyLoyaltyDiscount, buildLoyaltyChallenge } from './loyalty.js';
 import { HIVE_EARN_TOOLS, executeHiveEarnTool, isHiveEarnTool } from './hive-earn-tools.js';
 import { buildAgentCard, buildOacJsonLd, renderRootHtml } from './hive-agent-card.js';
 import { renderLanding, renderRobots, renderSitemap, renderSecurity, renderOgImage, seoJson, BRAND_GOLD } from './meta.js';
@@ -319,21 +320,24 @@ app.post('/v1/exchange/quote', async (req, res) => {
   }
 
   if (!tx_hash) {
+    // Rail 3: apply loyalty discount to $0.001 base price
+    const BASE_PRICE_ATOMIC = 1000; // $0.001 USDC atomic
+    const loyalty = await applyLoyaltyDiscount(req, res, BASE_PRICE_ATOMIC);
     return res.status(402).json({
       error: 'payment_required',
-      x402: {
-        type: 'x402', version: '1', kind: 'exchange_quote',
-        asking_usd: 0.001, accept_min_usd: 0.001,
-        asset: 'USDC', asset_address: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913',
-        network: 'base', pay_to: '0x15184bf50b3d3f52b60434f8942b7d52f2eb436e',
-        nonce: Math.random().toString(36).slice(2),
-        issued_ms: Date.now(),
-      },
+      x402: buildLoyaltyChallenge({
+        adjustedPrice:      loyalty.adjustedPrice,
+        discountAppliedBps: loyalty.discountAppliedBps,
+        resource:           req.originalUrl,
+        description:        'HiveExchange market quote. Autonomous agent prediction markets on Base.',
+      }),
       bogo: BOGO_BLOCK,
       bogo_first_call_free: true,
       bogo_loyalty_threshold: 6,
       bogo_pitch: "Pay this once, your 6th call is on the house. New here? Add header x-hive-did to claim your first call free.",
-      note: `Submit tx_hash in body or 'x402-tx-hash' header. Asking 0.001 USDC on Base to 0x15184bf50b3d3f52b60434f8942b7d52f2eb436e.`,
+      note: loyalty.discountAppliedBps > 0
+        ? `Receipt-gravity discount: ${loyalty.discountAppliedBps / 100}% off (Rail 3). Submit X-Payment to proceed.`
+        : `Submit tx_hash in body or 'x402-tx-hash' header. Asking 0.001 USDC on Base. Present X-Hive-Prior-Receipts for loyalty discount.`,
       did: did || null,
     });
   }
