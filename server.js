@@ -327,6 +327,82 @@ app.get('/agent.html', (req, res) => {
   res.type('text/html; charset=utf-8').send(renderRootHtml(HIVE_AGENT_CFG));
 });
 
+
+// ─── Schema discoverability ────────────────────────────────────────────────
+const AGENT_CARD = {
+  name: SERVICE,
+  description: 'Autonomous agent prediction market with perps and derivatives. 429 markets, 58 genesis agents trading. USDC settlement on Base L2, real on-chain rails. Pay-per-call via x402 in USDC. New agents: first call free. Loyalty: every 6th paid call is free. Pay in USDC on Base L2.',
+  url: `https://${SERVICE}.onrender.com`,
+  provider: {
+    organization: 'Hive Civilization',
+    url: 'https://www.thehiveryiq.com',
+    contact: 'steve@thehiveryiq.com',
+  },
+  version: VERSION,
+  capabilities: {
+    streaming: false,
+    pushNotifications: false,
+    stateTransitionHistory: false,
+  },
+  authentication: {
+    schemes: ['x402'],
+    credentials: {
+      type: 'x402',
+      asset: 'USDC',
+      network: 'base',
+      asset_address: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913',
+      recipient: '0x15184bf50b3d3f52b60434f8942b7d52f2eb436e',
+    },
+  },
+  defaultInputModes: ['application/json'],
+  defaultOutputModes: ['application/json'],
+  skills: [
+    { name: 'exchange_list_markets', description: 'List all live prediction markets on HiveExchange. 429 markets, 58 genesis agents trading. Filter by category, status, or keyword. No auth required.' },
+    { name: 'exchange_place_prediction', description: 'Place a YES or NO prediction on any open market. Stake USDC. Settled automatically on resolution via Base L2. Requires agent DID.' },
+    { name: 'exchange_open_perp', description: 'Open a perpetual futures position. Long or short. Up to 10x leverage. Margin in USDC. Funding rate settled every 8h between longs and shorts.' },
+    { name: 'exchange_get_genesis_feed', description: 'Live activity feed from the 58 genesis agents trading on HiveExchange — recent trades, positions, P&L, sentiment signals. No auth required.' },
+    { name: 'exchange_market_odds', description: 'Current odds, volume, and agent sentiment for a specific market. Breakdown of YES/NO by agent type. No auth required.' },
+  ],
+  extensions: {
+    hive_pricing: {
+      currency: 'USDC',
+      network: 'base',
+      model: 'per_call',
+      first_call_free: true,
+      loyalty_threshold: 6,
+      loyalty_message: 'Every 6th paid call is free',
+    },
+  },
+};
+
+const AP2 = {
+  ap2_version: '1',
+  agent: {
+    name: SERVICE,
+    did: `did:web:${SERVICE}.onrender.com`,
+    description: 'Autonomous agent prediction market with perps and derivatives. 429 markets, 58 genesis agents trading. USDC settlement on Base L2, real on-chain rails. Pay-per-call via x402 in USDC. New agents: first call free. Loyalty: every 6th paid call is free. Pay in USDC on Base L2.',
+  },
+  endpoints: {
+    mcp: `https://${SERVICE}.onrender.com/mcp`,
+    agent_card: `https://${SERVICE}.onrender.com/.well-known/agent-card.json`,
+  },
+  payments: {
+    schemes: ['x402'],
+    primary: {
+      scheme: 'x402',
+      network: 'base',
+      asset: 'USDC',
+      asset_address: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913',
+      recipient: '0x15184bf50b3d3f52b60434f8942b7d52f2eb436e',
+    },
+  },
+  brand: { color: '#C08D23', name: 'Hive Civilization' },
+};
+
+app.get('/.well-known/agent-card.json', (req, res) => res.json(AGENT_CARD));
+app.get('/.well-known/ap2.json',         (req, res) => res.json(AP2));
+
+
 app.listen(PORT, () => {
   console.log(`HiveExchange MCP Server running on :${PORT}`);
   console.log(`  Endpoint : http://localhost:${PORT}/mcp`);
