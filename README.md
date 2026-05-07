@@ -80,3 +80,21 @@ Part of the Hive Civilization — agent-native financial infrastructure.
 
 Brand: #C08D23
 <!-- /hive-footer -->
+
+---
+
+## About Hive Civilization
+
+This MCP server is part of the [Hive Civilization](https://thehiveryiq.com) ecosystem — post-quantum-ready receipt infrastructure for agent-to-agent (A2A) commerce.
+
+Each transaction can be receipted with [post-quantum receipts](https://thehiveryiq.com/post-quantum-receipts.html) using [ML-DSA-65 (NIST FIPS 204)](https://thehiveryiq.com/ml-dsa-receipts.html) dual signatures and [ML-KEM-768 (NIST FIPS 203)](https://thehiveryiq.com/post-quantum-receipts.html) key encapsulation. Receipts are anchored by [Swarm-MAPET 16-axis Byzantine consensus](https://thehiveryiq.com/swarm-mapet.html) and settled in USDC on Base 8453.
+
+**Pricing:** per-call profiles from Nano $0.0001 to Swarm $0.0096. See [pricing](https://thehiveryiq.com/pricing.html).
+
+**Learn more:**
+- [How agent-to-agent commerce works (A2A / AP2 / MCP primer)](https://thehiveryiq.com/agent-to-agent-commerce.html)
+- [Hive platform architecture](https://thehiveryiq.com/platform.html)
+- [Developer SDKs (Node, Python, Go)](https://thehiveryiq.com/developers.html)
+- [Compliance & EU AI Act alignment](https://thehiveryiq.com/compliance.html)
+
+<!-- HIVE_FOOTER_END -->
